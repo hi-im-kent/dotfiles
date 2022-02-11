@@ -14,11 +14,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "kent-laptop"; # Define your hostname.
+  networking.hostName = "(Your Hostname)"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
-  time.timeZone = "Asia/Shanghai";
+  time.timeZone = "(Time zone)";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -62,13 +62,11 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.kent = {
+  users.users.(User Name) = {
      isNormalUser = true;
-     extraGroups = [ "wheel" "libvirtd" "steam" ]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "wheel" "libvirtd" ]; # Enable ‘sudo’ for the user.
   };
   
-  users.users.home = {
-     isNormalUser = true;
  };
   nixpkgs.config = {
      nixpkgs.config.allowUnfree = true;
@@ -81,6 +79,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  ### You don't need to copy all of those packages
   environment.systemPackages = with pkgs; [
      vim neovim wget tor privoxy steam pipewire flatpak chrome-gnome-shell
      virt-manager keepassxc tor-browser-bundle-bin libvirt gnome.gnome-tweaks git neofetch killall
@@ -137,7 +136,7 @@
   # Enable Flatpaks
   services.flatpak.enable = true;
 
-  # Enable Bluetooth support
+  # Enable Bluetooth support (Uncomment to enable bluetooth support)
   # hardware.bluetooth.enable = true;
   # services.blueman.enable = true;
 
@@ -160,15 +159,15 @@
   # Allow installing unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable Chrom Gnome Shell
+  # Enable Chrom Gnome Shell (GNOME Extension support)
   nixpkgs.config.firefox.enableGnomeExtensions = true;
   services.gnome.chrome-gnome-shell.enable = true; 
 
   # Tor and Privoxy stuff
-  services.tor.enable = true; 
-  services.tor.client.enable = true;
-  services.privoxy.enable = true; 
-  services.privoxy.enableTor= true;
+  # services.tor.enable = true; 
+  # services.tor.client.enable = true;
+  # services.privoxy.enable = true; 
+  # services.privoxy.enableTor= true;
 
   # Virt Manager
   virtualisation.libvirtd.enable = true;
@@ -176,13 +175,15 @@
 
   # Zeronet thingy 
   # services.zeronet.enable = true; 
+  
+  ### Uncomment to enable printing support
+  # services.printing.enable = true;
+  # services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.cnijfilter2 ];
 
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.cnijfilter2 ];
-
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = false;
-  system.autoUpgrade.channel = https://nixos.org/channels/nixos-unstable;
+  ### Uncomment to enable auto upgrade (Unstable branch)
+  # system.autoUpgrade.enable = true;
+  # system.autoUpgrade.allowReboot = false;
+  # system.autoUpgrade.channel = https://nixos.org/channels/nixos-unstable;
   
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
