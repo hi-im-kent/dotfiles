@@ -14,11 +14,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "(Your Hostname)"; # Define your hostname.
+  networking.hostName = "INSERT-HOSTNAME-HERE"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
-  time.timeZone = "(Time zone)";
+  time.timeZone = "America/New_York";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -58,9 +58,9 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.(User Name) = {
+  users.users.User = {
      isNormalUser = true;
-     extraGroups = [ "wheel" "libvirtd" ]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
   
  };
@@ -77,11 +77,10 @@
   # $ nix search wget
   ### You don't need to copy all of those packages
   environment.systemPackages = with pkgs; [
-     vim neovim wget tor privoxy steam pipewire flatpak chrome-gnome-shell
-     virt-manager keepassxc tor-browser-bundle-bin libvirt gnome.gnome-tweaks git neofetch killall
-     htop vscode papirus-icon-theme lolcat mesa onionshare freenet transmission blender 
-     gimp firefox transmission-gtk handbrake krita torsocks gnomeExtensions.espresso
-     gnomeExtensions.clipboard-indicator fractal
+     vim wget tor privoxy steam pipewire flatpak chrome-gnome-shell
+     virt-manager keepassxc tor-browser-bundle-bin libvirt gnome.gnome-tweaks git neofetch
+     htop papirus-icon-theme freenet transmission blender 
+     gimp firefox transmission-gtk krita torsocks fractal
  ];
 
   fonts.fonts = with pkgs; [
@@ -106,10 +105,11 @@
       '';
  };
 
-  services.yggdrasil = {
-    enable = true;
-    persistentKeys = false;
- };
+  # services.yggdrasil = {
+  # enable = true;
+  # persistentKeys = false;
+  # };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -130,7 +130,7 @@
   # networking.firewall.enable = false;
 
   # Enable Flatpaks
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
 
   # Enable Bluetooth support (Uncomment to enable bluetooth support)
   # hardware.bluetooth.enable = true;
@@ -150,10 +150,10 @@
   };
 
   # Enable Steam support
-  programs.steam.enable = true;
+  # programs.steam.enable = true;
   
   # Allow installing unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # Enable Chrom Gnome Shell (GNOME Extension support)
   nixpkgs.config.firefox.enableGnomeExtensions = true;
@@ -166,8 +166,8 @@
   # services.privoxy.enableTor= true;
 
   # Virt Manager
-  virtualisation.libvirtd.enable = true;
-  programs.dconf.enable = true;
+  # virtualisation.libvirtd.enable = true;
+  # programs.dconf.enable = true;
 
   # Zeronet thingy 
   # services.zeronet.enable = true; 
