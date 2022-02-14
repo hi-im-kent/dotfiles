@@ -17,9 +17,7 @@ Linux
 
 # Install (Linux only rn, don't know the commands of other systems)
 
-Linux 
-
-`cd ./Downloads`
+Linux
 
 `cat nixos-iso.tar.gz?? > nixos-iso.tar.gz`
 
