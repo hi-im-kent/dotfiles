@@ -63,7 +63,6 @@
      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
   
- };
   nixpkgs.config = {
      nixpkgs.config.allowUnfree = true;
      packageOverrides = pkgs: {
