@@ -19,7 +19,7 @@ Linux
 
 Linux
 
-`cat nixos-iso.tar.gz?? > nixos-iso.tar.gz`
+`cat nixos.iso.part? > nixos.iso`
 
 # Create the ISO if you want to
 
