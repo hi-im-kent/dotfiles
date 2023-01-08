@@ -4,6 +4,7 @@ Random dotfiles from me, totally not copied from other people's github
 ## Where these files come from 
 - [waybar config](https://github.com/mverna27/dotfiles_OLD/tree/master/.config/waybar)
 - [sway, mako and i3config colour](https://draculatheme.com/)
+- [The Arch wiki (ofc)](https://wiki.archlinux.org/)
 
 ## I recommend these BetterDiscord plugins if you use it
 - [Plugin Repo](https://betterdiscord.app/plugin/PluginRepo)
