@@ -1,0 +1,21 @@
+font:
+  normal:
+    family: FiraCode
+    style: Regular
+
+  bold:
+    family: FiraCode
+    style: Bold
+
+  italic:
+    family: FiraCode
+    style: Italic
+
+  bold_italic:
+    family: FiraCode
+    style: Bold Italic
+
+  size: 12
+
+import:
+  - .config/alacritty/dracula.yml
