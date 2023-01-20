@@ -7,7 +7,6 @@
 
 alias ls='exa'
 alias cat='bat'
-alias nano='helix'
 eval "$(starship init bash)"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
