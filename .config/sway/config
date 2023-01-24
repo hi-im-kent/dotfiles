@@ -20,13 +20,7 @@ bindswitch --reload --locked lid:on exec $lock
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg /home/kent/.config/sway/base.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+output * bg $HOME/.config/sway/base.png fill
 
 ### Idle configuration
 exec swayidle -w \
@@ -45,8 +39,6 @@ default_border none
        natural_scroll enabled
        middle_emulation enabled
    }
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
 
 ### Key bindings
 #
@@ -187,9 +179,9 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
     # Volume Keybinds
-    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1| awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
-    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
-    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && echo 0 > $WOBSOCK
+    bindsym XF86AudioRaiseVolume exec pamixer -ui 2 && pamixer --get-volume > $WOBSOCK
+    bindsym XF86AudioLowerVolume exec pamixer -ud 2 && pamixer --get-volume > $WOBSOCK
+    bindsym XF86AudioMute exec pamixer --toggle-mute && ( [ "$(pamixer --get-mute)" = "true" ] && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
 
     # Brightness Keybinds
     bindsym XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
@@ -231,18 +223,21 @@ bindsym $mod+r mode "resize"
 bar {
     swaybar_command waybar
     }
-    # Wob Config and stuff
+    
+# Other stuff
+
     set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
     
     exec {
         rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
-        systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
         mako
         wl-paste -t text --watch clipman store --no-persist
         fcitx5 -d
+        pipewire
+        pipewire-pulse
     }
 
-exec_always {
-        autotiling-rs
+    exec_always {
+        autotiling
     }
 include /etc/sway/config.d/*
