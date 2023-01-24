@@ -225,9 +225,7 @@ bar {
     }
     
 # Other stuff
-
     set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-    
     exec {
         rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
         mako
@@ -236,8 +234,8 @@ bar {
         pipewire
         pipewire-pulse
     }
-
     exec_always {
         autotiling
     }
+
 include /etc/sway/config.d/*
