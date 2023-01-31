@@ -1,6 +1,9 @@
 # dotfiles
 Random dotfiles from me, totally not copied from other people's github
 
+# Screenshot
+![Screenshot](https://raw.githubusercontent.com/hi-im-kent/dotfiles/main/screenshot.png)
+
 ## Where these files come from 
 - [waybar config](https://github.com/mverna27/dotfiles_OLD/tree/master/.config/waybar)
 - [sway, mako and i3config colour](https://draculatheme.com/)
