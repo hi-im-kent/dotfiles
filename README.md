@@ -2,7 +2,6 @@
 Random dotfiles from me, totally not copied from other people's github
 
 # Screenshot
-![Screenshot (sway)](https://raw.githubusercontent.com/hi-im-kent/dotfiles/3dcb5c86d5f2ad4d9084b6f4f1703a15aea0ceda/screenshot.png)
 ![Screenshot (hyprland)](https://raw.githubusercontent.com/hi-im-kent/dotfiles/main/screenshot2.png)
 
 ## Where these files come from 
