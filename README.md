@@ -2,7 +2,8 @@
 Random dotfiles from me, totally not copied from other people's github
 
 # Screenshot
-![Screenshot](https://raw.githubusercontent.com/hi-im-kent/dotfiles/main/screenshot.png)
+![Screenshot (sway)](https://raw.githubusercontent.com/hi-im-kent/dotfiles/main/screenshot.png)
+![Screenshot (hyprland)](https://raw.githubusercontent.com/hi-im-kent/dotfiles/main/screenshot2.png)
 
 ## Where these files come from 
 - [waybar config](https://github.com/mverna27/dotfiles_OLD/tree/master/.config/waybar)
