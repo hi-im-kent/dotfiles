@@ -1,102 +1,107 @@
 {
-	"layer": "top",
-	"modules-left": ["wlr/workspaces","custom/media"],
-	"modules-center": ["hyprland/window"],
-	"modules-right": ["tray","network","cpu","memory","pulseaudio","battery","clock"],
-
-	"pulseaudio": {
-            // "scroll-step": 1, // %, can be a float
-            "format": "{volume}% {icon}  {format_source}",
-            "format-bluetooth": "{volume}% {icon}  {format_source}",
-            "format-bluetooth-muted": " {icon}  {format_source}",
-            "format-muted": " {format_source}",
-            "format-source": "{volume}% ",
-            "format-source-muted": "",
-            "format-icons": {
-                //"headphone": "",
-                //"hands-free": "",
-                //"headset": "",
-                "phone": "",
-                "portable": "",
-                "default": ["", "", ""]
-            },
-            "on-click": "pavucontrol",
-            "min-length": 12,
-        },
-
-	"network": {
-		"tooltip": false,
-		"format-wifi": "  {essid}",
-		"format-ethernet": ""
-	},
-
-	"backlight": {
-		"tooltip": false,
-		"format": " {}%",
-		"interval":1,
-                "on-scroll-up": "light -A 5",
-		"on-scroll-down": "light -U 5"
-	},
-        "battery": {
-          "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 20
-          },
-          "format": "{icon}  {capacity}%",
-          "format-charging": " {capacity}%",
-          "format-plugged": " {capacity}%",
-          "format-alt": "{time} {icon}",
-          "format-icons": ["", "", "", "", ""]
-        },
-
-	"tray":{
-		"icon-size": 24,
-		"spacing": 12
-	},
-
-        "clock": {
-          "format": "{: %d/%m   %H:%M}",
-          "min-length": 17,
-          "max-length": 25
-        },
-        
-        "cpu": {
-          "interval": 5,
-          "format": " {usage}%",
-          "min-length": 5,
-          "max-length": 10
-         },
-   
-         "memory": {
-           "interval": 5,
-           "format": " {percentage}%",
-           "min-length": 5,
-           "max-length": 10
-         },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-        "on-click": "playerctl play-pause"
+    "height": 40, // Waybar height (to be removed for auto height)
+    "layer": "top", // Waybar at top layer
+    "modules-left": ["custom/launcher", "cpu", "memory", "wlr/workspaces", "custom/weather"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["tray", "network", "pulseaudio",  "backlight", "battery", "custom/lock", "clock", "custom/power-menu"],
+    "wlr/workspaces": {
+      "format": "{icon}",
+      "on-click": "activate",
+      "format-icons": {
+        "active": " 󰮯",
+        "default": "",
+      }
+    },
+    "hyprland/window": {
+        "format": "{}"
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%b %d %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     },
 
-        "wlr/workspaces": {
-             "format": "{icon}",
-             "on-scroll-up": "hyprctl dispatch workspace e+1",
-             "on-scroll-down": "hyprctl dispatch workspace e-1",
-             "on-click": "activate"
-        },
+    "cpu": {
+      "interval": 10,
+      "format": " {}%",
+      "max-length": 10,
+      "on-click": "",
+    },
+    "memory": {
+        "interval": 30,
+        "format": " {}%",
+        "format-alt":" {used:0.1f}GB",
+        "max-length": 10,
+    },
+    "backlight": {
+        "device": "eDP-1",
+        "format": "{icon}",
+        "tooltip-format": "{percent}",
+        "format-icons": ["󱩎 ", "󱩏 ", "󱩐 ", "󱩑 ", "󱩒 ", "󱩓 ", "󱩔 ", "󱩕 ", "󱩖 ", "󰛨 "],
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-"
 
-        "hyprland/window": {
-            "separate-outputs": true
-        },
+    },
+    "network": {
+        /* "format-wifi": "直", */
+        "format-wifi": "{icon}",
+        "format-ethernet": " ",
+        "format-disconnected": "󰌙",
+        "tooltip-format": "{essid}",
+        "on-click": "~/.config/waybar/scripts/network/rofi-network-manager.sh",
+        "format-icons": [" 󰤯"," 󰤟"," 󰤢"," 󰤥"," 󰤨"],
+    },
 
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "default": ["", "", "󱄠"]
+        },
+        "on-click": "pavucontrol &",
+        "on-scroll-up": "pamixer --allow-boost -ui 5",
+     	"on-scroll-down": "pamixer --allow-boost -ud 5"
+    },
+
+    "battery": {
+      "bat": "BAT1",
+      "adapter": "ADP0",
+      "interval": 60,
+      "states": {
+          "warning": 30,
+          "critical": 15
+      },
+      "max-length": 20,
+      "format": "{icon} ",
+      "format-warning": "{icon}",
+      "format-critical": "{icon}",
+      "format-charging": "<span font-family='Font Awesome 6 Free'></span>",
+      "format-plugged": "ﮣ", 
+
+      "format-alt": "{icon} {time}",
+      "format-full": "󱊦 ", 
+      "format-icons": ["󱊡", "󱊢", "󱊣"]
+    },
+    "custom/weather": {
+      "exec": "python3 ~/.config/waybar/scripts/weather.py",
+      "restart-interval": 300,
+      "return-type": "json",
+    },   
+   "custom/lock": {
+       "tooltip" : false,
+       "on-click": "swaylock -S",
+       "format" : "",
+    },
+
+    "custom/power-menu": {
+        "format": " ⏻ ",
+        "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh &",
+    }, 
+    "custom/launcher": {
+        "format": "󰮫",
+        "on-click": "wofi --show drun &",
+    },
 }
